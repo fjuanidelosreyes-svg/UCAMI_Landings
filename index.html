@@ -27,6 +27,7 @@
   #panel h1{font-weight:400;font-size:32px;line-height:1.18;margin:0 0 12px;letter-spacing:-.015em}
   #panel .lede{color:var(--muted);font-size:16px;max-width:58ch;margin:0 0 30px}
   .cards{display:grid;gap:11px}
+  #cards .grp{margin:26px 0 2px}#cards .grp:first-child{margin-top:0}
   .cardc{display:flex;align-items:center;gap:16px;width:100%;text-align:left;
     background:var(--card);border:1px solid var(--line);border-radius:11px;padding:17px 19px;transition:.15s}
   .cardc:hover{border-color:var(--navy2);transform:translateY(-1px)}
@@ -150,10 +151,10 @@
 <body>
 
 <section id="panel">
-  <p class="eyebrow">UCAMI · Facultad de Ciencias de la Salud</p>
+  <p class="eyebrow">UCAMI · Direcciones de carrera</p>
   <h1 class="serif">Entrevistas a directores de carrera</h1>
-  <p class="lede">Insumo para la propuesta de fortalecimiento de la página web que el Decanato
-    eleva a Rectorado. Se guarda solo después de cada respuesta: puede cerrar la computadora
+  <p class="lede">Insumo para la propuesta de fortalecimiento de la página web de la UCAMI.
+    Se guarda solo después de cada respuesta: puede cerrar la computadora
     y retomar donde quedó.</p>
   <div class="cards" id="cards"></div>
   <p class="panelfoot">No hace falta escribir prolijo. Con palabras sueltas alcanza —
@@ -173,9 +174,7 @@
 
   <div class="quote">
     <em>Para iniciar la conversación</em>
-    “Esto no es una evaluación de la carrera. Estamos trabajando en una propuesta a elevarse
-    desde el Decanato de la FCS a Rectorado para fortalecer la página web, y necesitamos que
-    responda sobre aspectos que hoy no están contemplados en la difusión de la carrera.”
+    <span id="quoteTxt"></span>
   </div>
 
   <div class="brief-box">
@@ -347,19 +346,166 @@ const C = {
          ["Duración","verificar: el documento dice 4 años, la web dice 2","otra"],
          ["Nivel","Posgrado","web"],
          ["Título","Magíster en Enfermedades Tropicales Transmisibles","otra"],
-         ["Modalidad","Presencial","otra"]]}
+         ["Modalidad","Presencial","otra"]]},
+
+ medicina:{
+  n:"Medicina", full:"Medicina",
+  dir:"Méd. Ciruj. María Beatriz Zelaya", tipo:"grado",
+  competidor:"la UNNE u otra universidad de la región que tenga la carrera",
+  ejLaboral:"“En hospitales” no sirve; “el Madariaga” sí.",
+  phLaboral:"Ej.: Hospital Escuela Ramón Madariaga",
+  perfiles:["Recién egresado del secundario","Adulto que retoma","Ya trabaja en salud","Del interior de Misiones","De Corrientes","De Paraguay o Brasil","Se cambió de carrera","Viene de otra universidad (equivalencias o pase)"],
+  espacios:["Salas de simulación o anatomía","Laboratorios","Hospitales","Centros de atención primaria","Consultorios"],
+  rpExtra:{faq:["¿Preguntan por el cupo y el orden de mérito? ¿Cómo lo explica?",
+                "¿Qué preguntan sobre equivalencias y pases desde otras universidades?"]},
+  ficha:[["Norma aprobatoria","R.M. 1731/2015","web"],
+         ["Facultad","Ciencias de la Salud","web"],
+         ["Dirección de carrera","Méd. Ciruj. María Beatriz Zelaya","web"],
+         ["Coordinación académica","Méd. Esp. Norma Gabriela Cañete","web"],
+         ["Duración","no publicada — pedir el dato","otra"],
+         ["Título","no publicado — pedir el dato","otra"],
+         ["Cupo de ingreso","no publicado — pedir el dato","otra"],
+         ["Modalidad","Presencial","otra"]]},
+
+ odontologia:{
+  n:"Odontología", full:"Odontología",
+  dir:"Dr. Juan Sorbera", tipo:"grado",
+  competidor:"la UNNE u otra universidad de la región que tenga la carrera",
+  ejLaboral:"“En consultorios” no sirve; una clínica, un servicio o una institución con nombre, sí.",
+  phLaboral:"Ej.: el servicio de odontología de un hospital, con su nombre",
+  perfiles:["Recién egresado del secundario","Adulto que retoma","Ya trabaja en salud","Del interior de Misiones","De Corrientes","De Paraguay o Brasil","Se cambió de carrera","Viene de otra universidad (equivalencias o pase)"],
+  espacios:["Clínica odontológica","Laboratorios","Salas de simulación","Hospitales","Centros de atención primaria"],
+  rpExtra:{faq:["¿Preguntan por el cupo y el orden de mérito? ¿Cómo lo explica?",
+                "¿Preguntan por el costo de instrumental y materiales? ¿Qué responde?"]},
+  ficha:[["Norma aprobatoria","R.S.E. Nº 975/2024","web"],
+         ["Facultad","Ciencias de la Salud","web"],
+         ["Dirección de carrera","Dr. Juan Sorbera","web"],
+         ["Coordinación académica","Dr. Juan Cundom","web"],
+         ["Duración","no publicada — pedir el dato","otra"],
+         ["Título","no publicado — pedir el dato","otra"],
+         ["Cupo de ingreso","no publicado — pedir el dato","otra"],
+         ["Modalidad","Presencial","otra"]]},
+
+ filosofia:{
+  n:"Filosofía", full:"Licenciatura en Filosofía",
+  dir:"Lic. Fabio Amadeo Pereyra", tipo:"grado",
+  competidor:"otra universidad que tenga la carrera",
+  ejLaboral:"“En la docencia” no sirve; una escuela, universidad o equipo con nombre, sí.",
+  phLaboral:"Ej.: una escuela, una universidad o un equipo de investigación, con su nombre",
+  perfiles:["Recién egresado del secundario","Adulto que retoma","Docente o profesor que amplía su formación","Viene de un instituto de educación superior","Del interior de Misiones","De Corrientes","De Paraguay o Brasil","Se cambió de carrera"],
+  espT:"¿Qué espacios necesita un alumno para formarse en esta carrera?",
+  espacios:["Biblioteca","Grupos o centros de investigación","Escuelas","Extensión y comunidad","Instancias virtuales"],
+  rpExtra:{faq:["¿Qué preguntan sobre la salida laboral? ¿Cómo la responde?"]},
+  ficha:[["Norma aprobatoria","R.M. 993/2017","web"],
+         ["Facultad","Ciencias Humanas","web"],
+         ["Dirección de carrera","Lic. Fabio Amadeo Pereyra","web"],
+         ["Coordinación académica","no publicada — pedir el dato","otra"],
+         ["Duración","no publicada — pedir el dato","otra"],
+         ["Título","Licenciado/a en Filosofía","otra"],
+         ["Modalidad","Presencial","otra"]]},
+
+ tuti:{
+  n:"Tecnicatura en Traducción e Interpretación (TUTI)",
+  full:"Tecnicatura Universitaria en Traducción e Interpretación en Inglés",
+  dir:"Esp. Lara Granada Lanús", tipo:"grado", noun:"tecnicatura",
+  competidor:"otra institución que tenga la tecnicatura o una similar",
+  ejLaboral:"“El ámbito de la traducción” no sirve; una empresa, un estudio o una institución con nombre, sí.",
+  phLaboral:"Ej.: una empresa, un estudio de traducción o una institución, con su nombre",
+  perfiles:["Recién egresado del secundario","Adulto que retoma","Ya estudió inglés en academia o instituto","Trabaja y estudia","Del interior de Misiones","De Corrientes","De Paraguay o Brasil","Se cambió de carrera"],
+  espacios:["Laboratorio de idiomas","Prácticas de interpretación","Documentación real","Empresas o instituciones por convenio","Instancias virtuales"],
+  rpExtra:{diferencial:["¿Cómo la distingue de un profesorado de inglés o de un curso de idioma?"],
+           faq:["¿Preguntan por la continuidad hacia el Traductorado Público? ¿Cómo la explica?"]},
+  nota:"Misma directora que el Traductorado Público de Inglés: se pueden hacer en la misma reunión, cada carrera con su cuestionario.",
+  ficha:[["Norma aprobatoria","R.M. 911/2014","web"],
+         ["Facultad","Ciencias Humanas","web"],
+         ["Dirección de carrera","Esp. Lara Granada Lanús","web"],
+         ["Coordinación académica","Lic. Luciana Carolina Guillem","web"],
+         ["Articulación","Con 2 años más se accede al Traductorado Público de Inglés (título de grado)","web"],
+         ["Duración","no publicada — pedir el dato","otra"],
+         ["Título","no publicado — pedir el dato","otra"],
+         ["Modalidad","Presencial","otra"]]},
+
+ profsup:{
+  n:"Profesorado de Educación Superior (CCC)",
+  full:"Profesorado de Educación Superior — Ciclo de Complementación Curricular",
+  dir:"Dirección a confirmar", tipo:"ccc",
+  competidor:"otra universidad o instituto que ofrezca un ciclo similar",
+  ejLaboral:"“En el nivel superior” no sirve; un instituto o una cátedra con nombre, sí.",
+  phLaboral:"Ej.: un instituto de formación docente, con su nombre",
+  phPerfil:"Ej.: casi todos ya dan clases",
+  perfiles:["Profesor/a de secundaria que quiere pasar al nivel superior","Ya da clases en nivel superior y necesita el título","Busca mejorar su cargo o su puntaje","Del interior de Misiones","De Corrientes","De otra provincia","Se anota por la modalidad (presencial + virtual)"],
+  espacios:["Instancias virtuales","Prácticas en institutos de nivel superior","Aulas presenciales","Convenios con institutos"],
+  rpExtra:{faq:["¿Preguntan si se puede cursar trabajando? ¿Qué responde?",
+                "¿Preguntan por la validez del título para cargos y puntaje?"]},
+  ficha:[["Norma aprobatoria","R.M. 1984/23","web"],
+         ["Facultad","Ciencias Humanas","web"],
+         ["Dirección de carrera","no figura en la web — pedir el dato","otra"],
+         ["Coordinación","Lic. Flavia Vollmer","web"],
+         ["Duración","2 años","web"],
+         ["Requisito de ingreso","Profesor/a de Educación Secundaria (mín. 2600 h reloj y 4 años)","web"],
+         ["Inscripción 2027","2 de noviembre al 29 de diciembre de 2026","web"],
+         ["Carga horaria","1046 horas — la web corta la frase del 75 % presencial y no dice el 25 % restante","otra"],
+         ["Título","Profesor/a de Educación Superior en la disciplina del título de base","otra"],
+         ["Modalidad","75 % presencial — verificar el resto","otra"]]},
+
+ gestioneduc:{
+  n:"Gestión de la Educación (CCC)",
+  full:"Licenciatura en Gestión de la Educación — Ciclo de Complementación Curricular",
+  dir:"Lic. Eduardo Nievas", tipo:"ccc",
+  competidor:"otra universidad que ofrezca un ciclo similar",
+  ejLaboral:"“En la gestión” no sirve; una escuela, una supervisión o un organismo con nombre, sí.",
+  phLaboral:"Ej.: el equipo de conducción de una escuela o una supervisión, con su nombre",
+  phPerfil:"Ej.: casi todos ya trabajan en escuelas",
+  perfiles:["Docente de nivel inicial o primario","Profesor/a de secundaria","Técnico superior con experiencia en gestión educativa","Ya integra un equipo directivo","Aspira a cargos de conducción o supervisión","Del interior de Misiones","De otra provincia"],
+  espacios:["Instancias virtuales","Prácticas en instituciones educativas","Proyectos de gestión institucional","Organismos o instituciones por convenio"],
+  rpExtra:{faq:["¿Preguntan si se puede cursar trabajando? ¿Qué responde?",
+                "¿Preguntan por la validez del título para cargos de conducción?"]},
+  ficha:[["Norma aprobatoria","R.S.E. Nº 978/2024","web"],
+         ["Facultad","Ciencias Humanas","web"],
+         ["Dirección de carrera","Lic. Eduardo Nievas","web"],
+         ["Coordinación","Esp. Carlina Olivera","web"],
+         ["Duración","2 años","web"],
+         ["Requisito de ingreso","Profesor/a de Inicial, Primaria o Secundaria; o técnico superior afín con experiencia en docencia o gestión","web"],
+         ["Inscripción 2027","2 de noviembre al 29 de diciembre de 2026","web"],
+         ["Título","Licenciado/a en Gestión de la Educación","otra"],
+         ["Modalidad","no publicada — pedir el dato","otra"]]},
+
+ afdccc:{
+  n:"Actividades Físicas y Deportivas (CCC)",
+  full:"Licenciatura en Actividades Físicas y Deportivas — Ciclo de Complementación Curricular",
+  dir:"Dirección a confirmar", tipo:"ccc", fac:"Ciencias de la Salud",
+  competidor:"otra universidad que ofrezca un ciclo similar",
+  ejLaboral:"“El ámbito del deporte” no sirve; “Club Mitre” sí.",
+  phLaboral:"Ej.: Club Mitre",
+  phPerfil:"Ej.: casi todos ya dan clases en escuelas o clubes",
+  perfiles:["Profesor/a de Educación Física que quiere la licenciatura","Da clases en escuelas","Trabaja en un club o gimnasio","Busca gestión deportiva o alto rendimiento","Del interior de Misiones","De Corrientes","De otra provincia"],
+  espacios:["Instancias virtuales","Clubes","Gimnasios","Escuelas","Centros de alto rendimiento"],
+  rpExtra:{faq:["¿Preguntan en qué se diferencia del grado de Actividades Físicas y Deportivas? ¿Qué responde?",
+                "¿Preguntan por la validez del título para cargos y habilitaciones?"]},
+  nota:"Este ciclo se gestiona aparte del grado: confirmar quién lo dirige y quién responde las consultas.",
+  ficha:[["Norma aprobatoria","no publicada — pedir el dato","otra"],
+         ["Facultad","Ciencias de la Salud — verificar","otra"],
+         ["Dirección de carrera","no figura en la web — pedir el dato","otra"],
+         ["Duración","2 años","web"],
+         ["Requisito de ingreso","Profesor/a de Educación Física o similar, con validez nacional (mín. 2600 h reloj y 4 años)","web"],
+         ["Inscripción 2027","2 de noviembre al 29 de diciembre de 2026","web"],
+         ["Título","Licenciado/a en Actividades Físicas y Deportivas","otra"],
+         ["Modalidad","no publicada — pedir el dato","otra"]]}
 };
 
 /* ═══ 3. GUION ═══ */
 function guion(id){
-  const c = C[id], post = c.tipo === "posgrado";
+  const c = C[id], post = c.tipo === "posgrado", ccc = c.tipo === "ccc", adulto = post || ccc;
+  const noun = c.noun || (post ? "maestría" : ccc ? "ciclo" : "carrera");
+  const este = (noun==="ciclo" ? "este " : "esta ")+noun;
+  const el   = (noun==="ciclo" ? "el "   : "la ")+noun;
   const q = [];
 
   q.push({id:"apertura",
-    t:"Cuénteme sobre la carrera como se la cuenta a "+(post?"un interesado":"un padre")+" que viene a preguntar.",
+    t:"Cuénteme sobre la carrera como se la cuenta a "+(adulto?"un interesado":"un padre")+" que viene a preguntar.",
     s:"Déjelo hablar dos minutos sin interrumpir. Anote las frases que le llamen la atención, no todo.",
     type:"text", ph:"Frases sueltas alcanzan…",
-    rp: post
+    rp: adulto
       ? ["¿Qué es lo primero que le muestra si viene a conocer?"]
       : ["¿Y qué le dice al aspirante, que es distinto de lo que le dice al padre?",
          "¿Qué es lo primero que le muestra si viene a conocer?"]});
@@ -370,29 +516,31 @@ function guion(id){
     type:"text", ph:"",
     rp:[ post
         ? "Déme un ejemplo concreto de alguna entrevista con aspirantes de este año donde tuvo que explicar las bondades de esta carrera."
-        : "Déme un ejemplo concreto de algo que pasó este año que muestre eso.",
+        : ccc
+          ? "Déme un ejemplo concreto de alguna entrevista con aspirantes de este año donde tuvo que explicar las bondades de "+este+"."
+          : "Déme un ejemplo concreto de algo que pasó este año que muestre eso.",
       "Si un aspirante le dice que se inscribirá en "+c.competidor+", ¿qué le contesta?",
       "¿Qué tiene la UCAMI que esa universidad no tiene?",
       post ? "“Formación humanística de excelencia” lo dice todo el mundo. ¿Qué hay detrás de esa frase?"
            : "“Formación integral con valores” lo dice todo el mundo. ¿Qué hay detrás de esa frase?"]});
 
   q.push({id:"perfil",
-    t: post ? "¿Quién se inscribiría en esta maestría?" : "¿Quién se anota hoy en esta carrera?",
+    t: post ? "¿Quién se inscribiría en esta maestría?" : "¿Quién se anota hoy en "+este+"?",
     s:"Marque los perfiles que más vea. Después, una línea con lo que agregue.",
     type:"chips", key:"perfiles", nlabel:"Algo más sobre ese perfil",
-    ph: post ? "" : "Ej.: casi todas mujeres, muchas ya trabajando",
-    rp: post ? [] :
+    ph: c.phPerfil || (post ? "" : "Ej.: casi todas mujeres, muchas ya trabajando"),
+    rp: adulto ? [] :
       ["¿Cambió el perfil de alumno en los últimos años?",
        "¿De dónde vienen? ¿Cuántos son de afuera de Posadas?",
        "¿Quién cree que decide en la familia: el alumno o los padres?"]});
 
   q.push({id:"faq",
-    t: post ? "¿Cuáles son las tres preguntas que más hacen los interesados?"
-            : "¿Cuáles son las tres preguntas que más les hacen?",
-    s: post ? "Por correo, WhatsApp, teléfono o charlas informativas. Con las palabras que usa el interesado."
-            : "Las de WhatsApp, mesa de informes y charlas. Con las palabras que usa la gente.",
+    t: adulto ? "¿Cuáles son las tres preguntas que más hacen los interesados?"
+              : "¿Cuáles son las tres preguntas que más les hacen?",
+    s: adulto ? "Por correo, WhatsApp, teléfono o charlas informativas. Con las palabras que usa el interesado."
+              : "Las de WhatsApp, mesa de informes y charlas. Con las palabras que usa la gente.",
     type:"three", ph:["Ej.: ¿cuánto dura?","",""],
-    rp: post
+    rp: adulto
       ? ["¿Y cuál es la duda que nadie dice en voz alta?",
          "¿Qué pregunta hacen que le molesta porque ya está en la web?"]
       : ["¿Y cuál es la duda que nadie dice en voz alta?",
@@ -403,6 +551,14 @@ function guion(id){
     q.push({id:"competencias",
       t:"¿Qué competencias le brindará esta maestría al profesional egresado?",
       s:"Nombre tres.", type:"three", ph:["","",""], rp:[]});
+  } else if(ccc){
+    q.push({id:"laboral",
+      t:"¿Qué cambia en el trabajo de una persona cuando completa el ciclo?",
+      s:"Tres cargos, instituciones o instancias con nombre propio donde el nuevo título abre puertas. "+c.ejLaboral,
+      type:"three", ph:[c.phLaboral,"",""],
+      rp:["Nombre un egresado del ciclo y qué hace hoy.",
+          "¿Cambia el cargo, el sueldo o el puntaje? ¿Cómo se lo explica a un interesado?",
+          "¿Hay algo que puedan hacer con este título que no puedan con el de base?"]});
   } else {
     q.push({id:"laboral",
       t:"¿Dónde trabaja hoy un egresado de esta carrera?",
@@ -414,20 +570,20 @@ function guion(id){
   }
 
   q.push({id:"espacios",
-    t:"¿Qué espacios para prácticas requiere un alumno para formarse en esta "+(post?"maestría":"carrera")+"?",
+    t: c.espT || "¿Qué espacios para prácticas requiere un alumno para formarse en "+este+"?",
     s:"Lo concreto, propio de la UCAMI o por convenio. Marque los que correspondan y agregue el más importante en una línea.",
     type:"espacios", key:"espacios",
     nlabel:"El más importante, en una línea",
     s2:"¿Qué espacios requiere un graduado para su desempeño "+(post?"profesional":"laboral")+"?",
     s2d:"El más importante, en una línea.",
     rp:[ post ? "¿Desde qué año se desarrollan prácticas en la maestría?"
-              : "¿Desde qué año empiezan las prácticas en la carrera?",
+              : "¿Desde qué año empiezan las prácticas en "+el+"?",
       "¿Con qué instituciones tiene la UCAMI convenios firmados a la fecha?",
       "¿Hay espacios o equipamiento inaugurados o adquiridos recientemente para esta carrera?"]});
 
   if(!post){
     q.push({id:"testimonio",
-      t:"¿Qué alumno o egresado contaría bien su experiencia en la carrera, en cámara?",
+      t:"¿Qué alumno o egresado contaría bien su experiencia en "+el+", en cámara?",
       s:"Un video de un minuto con el celular rinde más que cualquier folleto.",
       type:"pair", f1:"Nombre", f2:"WhatsApp o mail",
       nlabel:"Por qué esa persona",
@@ -448,10 +604,12 @@ function guion(id){
     s:"En negro, lo que hoy publica la página web de la UCAMI. En rojo, lo que figura en otras publicaciones y hay que confirmar.",
     type:"ficha", rp:["¿Quién tiene el dato exacto si no lo recuerda?"]});
 
+  if(c.rpExtra) q.forEach(x=>{ if(c.rpExtra[x.id]) x.rp=(x.rp||[]).concat(c.rpExtra[x.id]); });
   return q;
 }
 
 /* ═══ 4. ESTADO ═══ */
+const FAC = c => c.fac || (c.ficha.find(f=>f[0]==="Facultad")||[0,""])[1];
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 let cur=null, Q=[], idx=0, D={}, t0=null, tick=null, saveTimer=null;
 const k = c => "ucami_iv2_"+c;
@@ -465,11 +623,14 @@ function status(c){
 
 /* ═══ 5. PANEL ═══ */
 function panel(){
-  $("#cards").innerHTML = Object.keys(C).map(id=>{
-    const [st,txt]=status(id);
-    return '<button class="cardc" data-c="'+id+'"><span class="nm">'+C[id].n+
-      '<small>'+(C[id].dir||"")+'</small></span><span class="badge b-'+st+'">'+txt+'</span></button>';
-  }).join("");
+  const facs=[...new Set(Object.keys(C).map(id=>FAC(C[id])))];
+  $("#cards").innerHTML = facs.map(f=>
+    '<p class="eyebrow grp">Facultad de '+f+'</p>'+
+    Object.keys(C).filter(id=>FAC(C[id])===f).map(id=>{
+      const [st,txt]=status(id);
+      return '<button class="cardc" data-c="'+id+'"><span class="nm">'+C[id].n+
+        '<small>'+(C[id].dir||"")+'</small></span><span class="badge b-'+st+'">'+txt+'</span></button>';
+    }).join("")).join("");
   $$("#cards .cardc").forEach(b=>b.onclick=()=>openBrief(b.dataset.c));
   show("#panel");
 }
@@ -483,6 +644,9 @@ function openBrief(c){
   cur=c; D=load(c); Q=guion(c);
   $("#briefWho").textContent = C[c].full;
   $("#consent").checked = !!D._consent;
+  $("#quoteTxt").textContent = FAC(C[c])==="Ciencias de la Salud"
+    ? "“Esto no es una evaluación de la carrera. Estamos trabajando en una propuesta a elevarse desde el Decanato de la FCS a Rectorado para fortalecer la página web, y necesitamos que responda sobre aspectos que hoy no están contemplados en la difusión de la carrera.”"
+    : "“Esto no es una evaluación de la carrera. Estamos trabajando en una propuesta para fortalecer la página web de la UCAMI, y necesitamos que responda sobre aspectos que hoy no están contemplados en la difusión de la carrera.”";
   show("#brief");
 }
 $("#briefBack").onclick=panel;
@@ -690,7 +854,7 @@ $("#send").onclick=async()=>{
     const rest=Object.keys(C).filter(x=>!load(x).sent).length;
     $("#thanksTxt").textContent = rest
       ? "Quedan "+rest+" carrera"+(rest>1?"s":"")+" por entrevistar."
-      : "Están las seis carreras. Ya se pueden armar las páginas.";
+      : "Están las "+Object.keys(C).length+" carreras. Ya se pueden armar las páginas.";
     show("#thanks");
   }catch(e){
     btn.disabled=false; btn.textContent="Cerrar y enviar";
